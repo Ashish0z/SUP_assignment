@@ -1,0 +1,390 @@
+{
+    "swagger": "6.2",
+    "info": {
+        "description": "NodeJS API project user management",
+        "version": "1.0.0",
+        "title": "User APIs",
+        "contact": {
+            "email": "abc@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:3080",
+    "basePath": "/users",
+    "paths" : {
+        "/register" : {
+            "post" : {
+                "summary" : "Register a new user",
+                "description": "Register a new user and add to database",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "name" : {
+                                        "type" : "string"
+                                    },
+                                    "email" : {
+                                        "type" : "string"
+                                    },
+                                    "password" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Registered",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User Registered"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User already exists",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User already exists"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login" : {
+            "post" : {
+                "summary" : "Login a registered user",
+                "description": "Login a registered user",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details for login",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    },
+                                    "password" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User logged in",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User logged in"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exists",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User does not exists"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "Invalid credentials"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        },
+        "/verify" : {
+            "post" : {
+                "summary" : "Verify if the user exists",
+                "description": "Verify if the user exists",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details for verification",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Verified", 
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User Verified"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User does not exist"
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        },
+        "/logout" : {
+            "post" : {
+                "summary" : "Logout a logged in user",
+                "description": "Logout a logged in user",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details for logout",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User logged out",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User logged out"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User does not exist"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/forgot" : {
+            "post" : {
+                "summary" : "Forgot password for a user",
+                "description": "Forgot password for a user",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details for forgot password",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Passsword reset link sent",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "Passsword reset link sent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User does not exist"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/reset" : {
+            "post" : {
+                 "summary" : "Reset password for a user",
+                "description": "Reset password for a user",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details for reset password",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    },
+                                    "password" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Password reset",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "Password reset"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User does not exist"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete" : {
+            "delete" : {
+                "summary" : "Delete a registered user",
+                "description": "Delete a registered user",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User details for deletion",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User deleted"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User does not exist",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "default" : "User does not exist"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
